@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "410301120695",
+    "project_id": "brainmaster-837c7",
+    "storage_bucket": "brainmaster-837c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410301120695:android:9015741fafae659a238d32",
+        "android_client_info": {
+          "package_name": "com.example.brain_master"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBICZ4-CUiJ0oBJLsFbcqNRwJavcXusw80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
