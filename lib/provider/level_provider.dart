@@ -24,12 +24,31 @@ String? title;
   @override
   Map<String, dynamic>? _levelData;
 
-  Map<String, dynamic>? get levelData => _levelData;
 
+  bool _isLoading = false; // Loading state flag
+ 
+  bool get isLoading => _isLoading; // Getter for loading state
+  Map<String, dynamic>? get levelData => _levelData; // Getter for level data
+
+  // Toggle expansion
+ 
+ 
+  // Fetch level data from Firestore
   Future<void> fetchLevelData(String docId) async {
-    final DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('levels').doc(docId).get();
-    _levelData = snapshot.data() as Map<String, dynamic>;
-    notifyListeners(); // Notify listeners when data is fetched
+    _isLoading = true; // Set loading to true before fetching data
+    notifyListeners();
+
+    try {
+      final DocumentSnapshot snapshot =
+          await FirebaseFirestore.instance.collection('levels').doc(docId).get();
+      _levelData = snapshot.data() as Map<String, dynamic>?; // Parse data safely
+    } catch (e) {
+      _levelData = null; // Handle error by setting data to null
+      print('Error fetching data: $e');
+    }
+
+    _isLoading = false; // Set loading to false after fetching data
+    notifyListeners();
   }
 
   void clearLevelData() {
@@ -49,7 +68,10 @@ void dispose() {
   byDefaultFlickManager?.dispose();
   super.dispose();
 }
-
+// Future<DocumentSnapshot> fetchLevelData(String docId) {
+//   return FirebaseFirestore.instance.collection('levels').doc(docId).get();
+//     notifyListeners();
+// }
   // Future<void> fetchLevelData(String docId) async {
   //   try {
   //     DocumentSnapshot docSnapshot = await FirebaseFirestore.instance

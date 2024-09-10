@@ -1,3 +1,4 @@
+import 'package:brain_master/model/task_model.dart';
 import 'package:brain_master/provider/level_provider.dart';
 import 'package:brain_master/screens/home/components/level_task.dart';
 import 'package:brain_master/screens/home/components/shimer.dart';
@@ -257,15 +258,23 @@ Future<DocumentSnapshot> fetchLevelData(String docId) {
                           await levelProvider.initializeFlickManager(url: videoUrl, levelTaskDocID: levelTaskDocID);
 
                           try {
-                            CollectionReference collectionRef =
-                                FirebaseFirestore.instance.collection("user_task_progress");
-                            await collectionRef.doc().set({
-                              "status": "isWatched",
-                              "userID": FirebaseAuth.instance.currentUser!.uid,
-                              "task_id": levelTaskDocID,
-                              "gems": 30,
-                              "videoPlayed": videoUrl
-                            });
+                            CollectionReference collectionRef = FirebaseFirestore.instance.collection("user_task_progress");
+
+UserTaskProgress userTaskProgress = UserTaskProgress(
+  status: "isWatched",
+  userID: FirebaseAuth.instance.currentUser!.uid,
+  taskId: levelTaskDocID,
+  gems: 30,
+  videoPlayed: videoUrl,
+);
+
+try {
+  await collectionRef.add(userTaskProgress.toMap());
+  print("Document successfully added.");
+} catch (e) {
+  print("Error adding document: $e");
+}
+
 
                             print('Value updated successfully.');
 
