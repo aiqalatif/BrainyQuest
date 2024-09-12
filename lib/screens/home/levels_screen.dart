@@ -18,7 +18,7 @@ import 'package:shimmer/shimmer.dart';
 
 class LevelScreen extends StatefulWidget {
   LevelScreen({super.key, required this.docId, required this.level});
-
+  
   final String docId;
   final int level;
 
@@ -43,256 +43,214 @@ class _LevelScreenState extends State<LevelScreen> {
     levelProvider.byDefaultFlickManager?.dispose();
     super.dispose();
   }
-Future<DocumentSnapshot> fetchLevelData(String docId) {
-  return FirebaseFirestore.instance.collection('levels').doc(docId).get();
-}
+
   @override
   Widget build(BuildContext context) {
-    final levelProvider = Provider.of<LevelProvider>(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF1C1B54),
-        elevation: 10,
-        shadowColor: Colors.yellow.withOpacity(0.3),
-        leadingWidth: 50,
-        leading: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Material(
-            elevation: 1,
-            color: CustomColors.darkBlue,
-            shape: const CircleBorder(),
-            child: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-                size: 17,
+    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    print(widget.docId);
+    print("****************************");
+    return Consumer<LevelProvider>(
+      builder: (context, levelProvider, child) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF1C1B54),
+            elevation: 10,
+            shadowColor: Colors.yellow.withOpacity(0.3),
+            leadingWidth: 50,
+            leading: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Material(
+                elevation: 1,
+                color: CustomColors.darkBlue,
+                shape: const CircleBorder(),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                    size: 17,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             ),
+            title: Text(
+              'Level ${widget.level}',
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            centerTitle: true,
           ),
-        ),
-        title: Text(
-          'Level ${widget.level}',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-        centerTitle: true,
-      ),
-      body: Container(
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF131B63),
-              Color(0xFF481162),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child:FutureBuilder<DocumentSnapshot>(
-    future: fetchLevelData(widget.docId), // Fetch data once
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        // Show shimmer loading while waiting for the future to complete
-        return  ShimmerListView();
-      }
-
-      if (!snapshot.hasData || snapshot.data == null) {
-        // Show message if no document data is found
-        return const Center(child: Text('Document does not exist.'));
-      }
-
-      // Parse the document data
-      var documentData = snapshot.data!.data() as Map<String, dynamic>;
-      var title = documentData['title'];
-      var gems = documentData['gems'];
-      var subtitle = documentData['subtitle'];
-
-      // Return your actual content here
-      return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          body: Container(
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF131B63),
+                  Color(0xFF481162),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: levelProvider.levelData == null
+                ? ShimmerListView() // Show shimmer loading while waiting for data
+                : SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Gift Awaiting',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Gift Awaiting',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 8,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                LinearProgressIndicator(
-                                  value: levelProvider.progressValue,
-                                  borderRadius: BorderRadius.circular(10),
-                                  backgroundColor: Colors.grey[800],
-                                  valueColor:
-                                      const AlwaysStoppedAnimation<Color>(
-                                          Colors.green),
-                                  minHeight: 15,
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 8,
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    LinearProgressIndicator(
+                                      value: levelProvider.progressValue,
+                                      borderRadius: BorderRadius.circular(10),
+                                      backgroundColor: Colors.grey[800],
+                                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
+                                      minHeight: 15,
+                                    ),
+                                    Text(
+                                      '${(levelProvider.progressValue * 100).toStringAsFixed(0)}%',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  '${(levelProvider.progressValue * 100).toStringAsFixed(0)}%',
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    _showCompletionDialog(context);
+                                  },
+                                  child: const Material(
+                                    elevation: 2,
+                                    color: CustomColors.darkBlue,
+                                    shape: CircleBorder(),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(7.0),
+                                      child: Image(
+                                        height: 35,
+                                        width: 35,
+                                        image: AssetImage('assets/images/gift.png'),
+                                      ),
+                                    ),
                                   ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          if (levelProvider.byDefaultFlickManager != null)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: SizedBox(
+                                height: 250.h,
+                                child: FlickVideoPlayer(
+                                  flickManager: levelProvider.byDefaultFlickManager!,
+                                  flickVideoWithControls: const FlickVideoWithControls(
+                                    controls: FlickPortraitControls(),
+                                    videoFit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          if (levelProvider.flickManager != null)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: SizedBox(
+                                height: 250.h,
+                                child: FlickVideoPlayer(
+                                  flickManager: levelProvider.flickManager!,
+                                  flickVideoWithControls: const FlickVideoWithControls(
+                                    controls: FlickPortraitControls(),
+                                    videoFit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          const SizedBox(height: 16),
+                          RichText(
+                            text: TextSpan(
+                              style: const TextStyle(color: Colors.white, fontSize: 15),
+                              children: [
+                                TextSpan(
+                                  text: levelProvider.isExpanded
+                                      ? levelProvider.subtitle
+                                      : '${levelProvider.subtitle!.substring(0, 100)}...',
+                                ),
+                                TextSpan(
+                                  text: levelProvider.isExpanded
+                                      ? ' Read Less'
+                                      : ' Read More',
+                                  style: const TextStyle(color: Colors.red),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      levelProvider.toggleExpansion();
+                                    },
                                 ),
                               ],
                             ),
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: InkWell(
-                              onTap: () {
-                                _showCompletionDialog(context);
-                              },
-                              child: const Material(
-                                elevation: 2,
-                                color: CustomColors.darkBlue,
-                                shape: CircleBorder(),
-                                child: Padding(
-                                  padding: EdgeInsets.all(7.0),
-                                  child: Image(
-                                    height: 35,
-                                    width: 35,
-                                    image: AssetImage(
-                                        'assets/images/gift.png'),
-                                  ),
-                                ),
-                              ),
-                            ),
+                          const SizedBox(height: 10),
+                          LevelTask(
+                            docId: widget.docId,
+                            onPlayTapped: (videoUrl, levelTaskDocID) async {
+                              print("videoUrl $videoUrl");
+                              await levelProvider.initializeFlickManager(url: videoUrl, levelTaskDocID: levelTaskDocID);
+
+                              try {
+                                CollectionReference collectionRef = FirebaseFirestore.instance.collection("user_task_progress");
+
+                                UserTaskProgress userTaskProgress = UserTaskProgress(
+                                  status: "isWatched",
+                                  userID: FirebaseAuth.instance.currentUser!.uid,
+                                  taskId: levelTaskDocID,
+                                  gems: 30,
+                                  videoPlayed: videoUrl,
+                                );
+
+                                await collectionRef.add(userTaskProgress.toMap());
+                                print("Document successfully added.");
+
+                                // Reload progress after updating
+                                await levelProvider.loadProgress(widget.docId);
+                              } catch (e) {
+                                print('Failed to update value: $e');
+                              }
+                            },
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      // Display shimmer effect if flickManager or byDefaultFlickManager is null
-                      if (levelProvider.flickManager == null && levelProvider.byDefaultFlickManager == null)
-                        Shimmer.fromColors(
-                          baseColor: Colors.grey[300]!,
-                          highlightColor: Colors.grey[100]!,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                              height: 250.h,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        )
-                      else ...[
-                        if (levelProvider.byDefaultFlickManager != null)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: SizedBox(
-                              height: 250.h,
-                              child: FlickVideoPlayer(
-                                flickManager: levelProvider.byDefaultFlickManager!,
-                                flickVideoWithControls:
-                                    const FlickVideoWithControls(
-                                  controls: FlickPortraitControls(),
-                                  videoFit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                        if (levelProvider.flickManager != null)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: SizedBox(
-                              height: 250.h,
-                              child: FlickVideoPlayer(
-                                flickManager: levelProvider.flickManager!,
-                                flickVideoWithControls:
-                                    const FlickVideoWithControls(
-                                  controls: FlickPortraitControls(),
-                                  videoFit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
-                      const SizedBox(height: 16),
-                      RichText(
-                        text: TextSpan(
-                          style: const TextStyle(color: Colors.white, fontSize: 15),
-                          children: [
-                            TextSpan(
-                              text: levelProvider.isExpanded
-                                  ? subtitle
-                                  : '${subtitle.substring(0, 100)}...',
-                            ),
-                            TextSpan(
-                              text: levelProvider.isExpanded
-                                  ? ' Read Less'
-                                  : ' Read More',
-                              style: const TextStyle(color: Colors.red),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  levelProvider.toggleExpansion();
-                                },
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      LevelTask(
-                        docId: widget.docId,
-                        onPlayTapped: (videoUrl, levelTaskDocID) async {
-                          print("videoUrl $videoUrl");
-                          await levelProvider.initializeFlickManager(url: videoUrl, levelTaskDocID: levelTaskDocID);
-
-                          try {
-                            CollectionReference collectionRef = FirebaseFirestore.instance.collection("user_task_progress");
-
-UserTaskProgress userTaskProgress = UserTaskProgress(
-  status: "isWatched",
-  userID: FirebaseAuth.instance.currentUser!.uid,
-  taskId: levelTaskDocID,
-  gems: 30,
-  videoPlayed: videoUrl,
-);
-
-try {
-  await collectionRef.add(userTaskProgress.toMap());
-  print("Document successfully added.");
-} catch (e) {
-  print("Error adding document: $e");
-}
-
-
-                            print('Value updated successfully.');
-
-                            // Reload progress after updating
-                            await levelProvider.loadProgress(widget.docId);
-                          } catch (e) {
-                            print('Failed to update value: $e');
-                          }
-                        },
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              );
-            }),
-      ),
+          ),
+        );
+      },
     );
   }
+
 
 
   

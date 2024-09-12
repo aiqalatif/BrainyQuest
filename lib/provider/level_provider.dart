@@ -32,16 +32,24 @@ String? title;
 
   // Toggle expansion
  
- 
-  // Fetch level data from Firestore
+
   Future<void> fetchLevelData(String docId) async {
     _isLoading = true; // Set loading to true before fetching data
     notifyListeners();
 
     try {
-      final DocumentSnapshot snapshot =
-          await FirebaseFirestore.instance.collection('levels').doc(docId).get();
-      _levelData = snapshot.data() as Map<String, dynamic>?; // Parse data safely
+      
+      final QuerySnapshot snapshot =
+          await  FirebaseFirestore.instance
+      .collection('levels')
+      .doc(docId) // For example: 'level1'
+      .collection(docId) // Subcollection under 'level1'
+      .get();
+      _levelData = snapshot as Map<String, dynamic>?; 
+      print("********************");
+      print(_levelData!.length.toString());
+      print("######################################");
+      // Parse data safely
     } catch (e) {
       _levelData = null; // Handle error by setting data to null
       print('Error fetching data: $e');
@@ -83,7 +91,7 @@ void dispose() {
   //       var documentData = docSnapshot.data() as Map<String, dynamic>;
   //       title = documentData['title'];
   //       gems = documentData['gems'];
-  //       subtitle = documentData['subtitle'];
+  //       subtitle = documentData['description'];
   //       notifyListeners();
   //     } else {
   //       print('Document does not exist.');
@@ -92,6 +100,7 @@ void dispose() {
   //     print('Failed to fetch document: $e');
   //   }
   // }
+
   Future<void> initializeByDefaultFlickManager(String docId) async {
     try {
       var querySnapshot = await FirebaseFirestore.instance

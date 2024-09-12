@@ -28,11 +28,18 @@ class LevelsProvider with ChangeNotifier {
       // Fetch the levels ordered by the "level_num" field
       QuerySnapshot snapshot = await _firebaseFirestore
           .collection('levels')
-          .orderBy('level_num', descending: false) // Sort in ascending order
+          .orderBy('number', descending: false) // Sort in ascending order
           .get();
+          print("**********************************");
 
+       print(snapshot);
+        print("**********************************");
       _levelDocs = snapshot.docs;
       _isLoading = false;
+       print("**********************************");
+
+       print(_levelDocs.length.toString());
+        print("**********************************");
       notifyListeners();
     } catch (e) {
       _isLoading = false;
