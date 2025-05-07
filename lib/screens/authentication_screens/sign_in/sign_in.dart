@@ -69,10 +69,10 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                Color(0xFF131B63),
-                Color(0xFF481162),
-              ],
+               colors: [
+    Color(0xFFFFDEE9), // Soft light pink
+    Color(0xFFFCCDE2), // Slightly deeper pastel pink
+  ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),

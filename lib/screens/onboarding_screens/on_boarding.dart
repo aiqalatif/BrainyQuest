@@ -76,9 +76,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF131B63),
-              Color(0xFF481162),
-            ], // Gradient colors
+     Color(0xFFfed887),
+              Color(0xFFFCCDE2), // Slightly deeper pastel pink
+  ], // Gradient colors
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -112,7 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onPressed: _onSkipPressed,
                 child: const CText(
                   text: 'Skip',
-                  style: TextStyle(color: Colors.white24, fontSize: 14),
+                  style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ),
             ),
@@ -123,7 +123,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onPressed: _onNextPressed,
                 child: Text(
                   _currentPage == _pages.length - 1 ? "Next" : "Next",
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
                 ),
               ),
             ),

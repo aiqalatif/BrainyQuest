@@ -21,10 +21,11 @@ class CustomButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [
-              Color(0xFFCF4F5B),
-              Color(0xFFDC0038),
-            ],
+           colors: [
+  Color(0xFF00B0FF), // Light sky blue
+  Color(0xFF0091EA), // Slightly darker sky blue
+],
+
             // Gradient colors
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

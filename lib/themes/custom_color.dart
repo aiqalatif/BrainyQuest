@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomColors {
-  static const Color darkBlue = Color(0xFF22325C);
-  static const Color lightBlue = Color(0xff36487A);
-  static const Color purpleColor = Color(0xFF290D56);
-  static const Color parrot = Color(0xFF00D361);
-  static const Color lightred = Color(0xFFD04959);
-  static const Color red = Color(0xffCE1313);
+  static const Color darkBlue = Color(0xFFB3E5FC);     // Soft sky blue
+  static const Color lightBlue = Color(0xFFDCEDC8);    // Light pastel green
+  static const Color purpleColor = Color(0xFFF3E5F5);  // Very light lavender
+  static const Color accent = Color(0xFFFFCDD2);       // Soft pink (accent)
+  static const Color lightred = Color(0xFFFF8A80);     // Light coral red
+  static const Color red = Color(0xFFE57373);          // Soft red
 }

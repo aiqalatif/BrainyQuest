@@ -18,10 +18,10 @@ class GetStarted extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF131B63),
-              Color(0xFF481162),
-            ],
+           colors: [
+     Color(0xFFfed887),
+              Color(0xFFFCCDE2),// Slightly deeper pastel pink
+  ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -49,7 +49,8 @@ class GetStarted extends StatelessWidget {
                 CustomButton(
                   name: "Get Started",
                   onPress: () {
-                    Get.offAll(() => FirebaseAuth.instance.currentUser != null ? const CustomNavBar() : const OnboardingScreen());
+                    Get.offAll(() => const CustomNavBar());
+                    // FirebaseAuth.instance.currentUser != null ? const CustomNavBar() : const OnboardingScreen());
                   },
                 ),
               ],

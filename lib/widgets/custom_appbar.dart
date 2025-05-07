@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/notifications.dart';
 import 'package:flutter_application/screens/profile_screen/edit_profile.dart';
@@ -48,7 +47,7 @@ class CustomAppbar extends StatelessWidget {
         Overlay.of(context).context.findRenderObject() as RenderBox;
 
     showMenu(
-      color: CustomColors.purpleColor,
+      color: CustomColors.lightBlue, // Updated to lightBlue color
       context: context,
       position: RelativeRect.fromLTRB(
         offset.dx,
@@ -59,7 +58,6 @@ class CustomAppbar extends StatelessWidget {
       items: <PopupMenuEntry>[
         const PopupMenuItem<int>(
           height: 25,
-
           value: 0,
           child: Text(
             style: TextStyle(
@@ -67,7 +65,6 @@ class CustomAppbar extends StatelessWidget {
             ),
             "English",
           ),
-          // Background color set karne ke liye
         ),
         const PopupMenuDivider(),
         const PopupMenuItem<int>(
@@ -104,7 +101,7 @@ class CustomAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
         leadingWidth: 130.w,
-        backgroundColor: const Color(0xFF201963),
+        backgroundColor: const Color(0xFF81D4FA),  // Sky blue color
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 20.0),
@@ -131,7 +128,7 @@ class CustomAppbar extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: CustomColors.darkBlue,
+                  color: const Color(0xFF80DEEA),  // Lighter Sky blue color
                   borderRadius: BorderRadius.circular(30)),
               child: _buildStatButton(
                 '13 gems',
@@ -143,7 +140,7 @@ class CustomAppbar extends StatelessWidget {
             SizedBox(width: 5.w),
             Container(
               decoration: BoxDecoration(
-                  color: CustomColors.darkBlue,
+                  color: const Color(0xFF80DEEA),  // Lighter Sky blue color
                   borderRadius: BorderRadius.circular(30)),
               child: _buildStatButton(
                 'English',
@@ -164,13 +161,13 @@ class CustomAppbar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: CircleAvatar(
-                backgroundColor: CustomColors.darkBlue,
+                backgroundColor: const Color(0xFF80DEEA),  // Lighter Sky blue color
                 radius: 15,
                 child: Image.asset('assets/images/notification.png',
                     width: 15, height: 15, color: Colors.white),
               ),
             ),
-          ), // Replacing the Icon with an image
+          ), 
         ]);
   }
 }

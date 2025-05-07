@@ -175,8 +175,8 @@ class LevelsGridView extends StatelessWidget {
                                                          borderRadius: BorderRadius.circular(10),
                                                          gradient: const LinearGradient(
                                                            colors: [
-                                                             Color(0xFF24155F),
-                                                             Color(0xFF37115F),
+                                                                 Color.fromARGB(255, 219, 182, 199),
+              Color(0xFFFCCDE2),
                                                            ], // Gradient colors
                                                            begin: Alignment.topCenter,
                                                            end: Alignment.bottomCenter,

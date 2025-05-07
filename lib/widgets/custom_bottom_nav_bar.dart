@@ -26,10 +26,10 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.purpleColor,
+      backgroundColor: const Color(0xFF80DEEA),
       body: _pages[_currentIndex], // Display the current page
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: const Color(0xFF22325C),
+        backgroundColor: const Color(0xFF80DEEA),
         shadowColor: Colors.yellow,
         showElevation: true,
         selectedIndex: _currentIndex,
