@@ -32,8 +32,8 @@ class _StatsState extends State<Stats> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF131B63),
-              Color(0xFF481162),
+              Color(0xFFfed887),
+              Color(0xFFFCCDE2),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

@@ -51,7 +51,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               child: Center(
                 child: Image(
                   height: 18,
-                  color: _currentIndex == 0 ? Colors.red : null,
+                  color: _currentIndex == 0 ? Color(0xFF2E3A59) : null,
                   image: const AssetImage("assets/images/home.png"),
                 ),
               ),
@@ -65,7 +65,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            activeColor: Colors.red,
+            activeColor: Color(0xFF2E3A59),
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
@@ -75,7 +75,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               child: Center(
                 child: Image(
                   height: 18,
-                  color: _currentIndex == 1 ? Colors.red : null,
+                  color: _currentIndex == 1 ? Color(0xFF2E3A59) : null,
                   image: const AssetImage("assets/images/stats.png"),
                 ),
               ),
@@ -89,7 +89,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            activeColor: Colors.red,
+            activeColor: Color(0xFF2E3A59),
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
@@ -99,7 +99,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               child: Center(
                 child: Image(
                   height: 20,
-                  color: _currentIndex == 2 ? Colors.red : null,
+                  color: _currentIndex == 2 ? Color(0xFF2E3A59) : null,
                   image: const AssetImage("assets/images/notifications.png"),
                 ),
               ),
@@ -113,7 +113,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            activeColor: Colors.red,
+            activeColor: Color(0xFF2E3A59),
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
@@ -123,7 +123,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               child: Center(
                 child: Image(
                   height: 18,
-                  color: _currentIndex == 3 ? Colors.red : null,
+                  color: _currentIndex == 3 ? Color(0xFF2E3A59) : null,
                   image: const AssetImage("assets/images/user.png"),
                 ),
               ),
@@ -137,7 +137,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                     ),
                   )
                 : const SizedBox.shrink(),
-            activeColor: Colors.red,
+            activeColor: Color(0xFF2E3A59),
             textAlign: TextAlign.center,
           ),
         ],

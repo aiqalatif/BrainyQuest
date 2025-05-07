@@ -172,7 +172,7 @@ class UpcomingMissions extends StatelessWidget {
                         final mission =
                             missionList[missionIndex] as Map<String, dynamic>;
                         final missions = mission['missions'] ?? 'No Name';
-                        final status = mission['status'] ?? 'No Status';
+                        final status = mission['status'] ?? false;
                         final docId = doc.id;
 
                         return Column(

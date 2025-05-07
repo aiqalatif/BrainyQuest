@@ -175,8 +175,13 @@ class LevelsGridView extends StatelessWidget {
                                                          borderRadius: BorderRadius.circular(10),
                                                          gradient: const LinearGradient(
                                                            colors: [
-                                                                 Color.fromARGB(255, 219, 182, 199),
-              Color(0xFFFCCDE2),
+                                                    
+                                                                
+                                                               Color.fromARGB(255, 219, 182, 199),
+                                                               Color(0xFFfed887),
+                                                       Color(0xFFFCCDE2),
+
+                                                       
                                                            ], // Gradient colors
                                                            begin: Alignment.topCenter,
                                                            end: Alignment.bottomCenter,
@@ -193,7 +198,7 @@ class LevelsGridView extends StatelessWidget {
                                                                    "Level $levelNum",
                                                                    style: const TextStyle(
                                     fontSize: 6,
-                                    color: Colors.white70,
+                                    color:  Color(0xFF2E3A59),
                                     fontWeight: FontWeight.w600,
                                                                    ),
                                                                  ),
@@ -218,7 +223,7 @@ class LevelsGridView extends StatelessWidget {
                                             "13",
                                             style: TextStyle(
                                               fontSize: 5,
-                                              color: Colors.white12,
+                                              color:  Color(0xFF2E3A59),
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
@@ -250,7 +255,7 @@ class LevelsGridView extends StatelessWidget {
                                                            ),
                                                            const Text(
                                                              "Your weapons",
-                                                             style: TextStyle(color: Colors.white, fontSize: 8),
+                                                             style: TextStyle(color:  Color(0xFF2E3A59), fontSize: 8),
                                                            )
                                                          ],
                                                        ),

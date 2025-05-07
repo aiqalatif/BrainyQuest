@@ -11,7 +11,7 @@ class Notifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1C1B54),
+        backgroundColor: const Color(0xFF81D4FA),
         elevation: 10,
         shadowColor: Colors.yellow.withOpacity(0.3),
         leadingWidth: 50,
@@ -48,8 +48,8 @@ class Notifications extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF131B63),
-              Color(0xFF481162),
+              Color(0xFFfed887),
+              Color(0xFFFCCDE2),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

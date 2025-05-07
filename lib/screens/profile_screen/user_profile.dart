@@ -26,7 +26,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  String userId = FirebaseAuth.instance.currentUser!.uid;
+  // String userId = FirebaseAuth.instance.currentUser!.uid;
   bool _isSwitched = false;
 
   @override
@@ -36,11 +36,11 @@ class _UserProfileState extends State<UserProfile> {
         preferredSize: Size.fromHeight(60.0),
         child: CustomAppbar(),
       ),
-      backgroundColor: const Color(0xFF201963), // Dark background color
+      backgroundColor: const Color(0xFF81D4FA), // Dark background color
       body: StreamBuilder<DocumentSnapshot>(
           stream: FirebaseFirestore.instance
               .collection('users')
-              .doc(userId)
+              .doc("userId")
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {

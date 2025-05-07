@@ -32,7 +32,7 @@ class CustomAppbar extends StatelessWidget {
               text: label,
               style: const TextStyle(
                 fontSize: 5,
-                color: Colors.white70,
+                color: Color(0xFF2E3A59),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -119,38 +119,39 @@ class CustomAppbar extends StatelessWidget {
               SizedBox(width: 13.h),
               const CText(
                 text: "Anabella",
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: Color(0xFF2E3A59), fontSize: 12),
               ),
             ],
           ),
         ),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: const Color(0xFF80DEEA),  // Lighter Sky blue color
+                  color:  Color(0xFFfed887), // Lighter Sky blue color
                   borderRadius: BorderRadius.circular(30)),
               child: _buildStatButton(
                 '13 gems',
                 'assets/images/diamond.png',
-                Colors.white,
+                Color(0xFF2E3A59),
                 (details) {},
               ),
             ),
             SizedBox(width: 5.w),
-            Container(
-              decoration: BoxDecoration(
-                  color: const Color(0xFF80DEEA),  // Lighter Sky blue color
-                  borderRadius: BorderRadius.circular(30)),
-              child: _buildStatButton(
-                'English',
-                'assets/images/language.png',
-                Colors.red,
-                (details) {
-                  _showCustomMenu(context, details.globalPosition);
-                },
-              ),
-            ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //       color:  Color(0xFFfed887),  // Lighter Sky blue color
+            //       borderRadius: BorderRadius.circular(30)),
+            //   child: _buildStatButton(
+            //     'English',
+            //     'assets/images/language.png',
+            //     Color(0xFF2E3A59),
+            //     (details) {
+            //       _showCustomMenu(context, details.globalPosition);
+            //     },
+            //   ),
+            // ),
           ],
         ),
         actions: [
@@ -161,10 +162,10 @@ class CustomAppbar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: CircleAvatar(
-                backgroundColor: const Color(0xFF80DEEA),  // Lighter Sky blue color
+                backgroundColor: const Color(0xFFfed887),  // Lighter Sky blue color
                 radius: 15,
                 child: Image.asset('assets/images/notification.png',
-                    width: 15, height: 15, color: Colors.white),
+                    width: 15, height: 15, color: Color(0xFF2E3A59),),
               ),
             ),
           ), 
