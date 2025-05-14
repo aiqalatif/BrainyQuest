@@ -54,6 +54,7 @@ dependencies:
   percent_indicator: ^4.2.3
   intl: ^0.20.2
   shimmer: ^3.0.0
+  google_sign_in: ^6.3.0
 
 
 dev_dependencies:

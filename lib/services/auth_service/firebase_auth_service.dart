@@ -1,6 +1,7 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application/utils/custom_toast_message.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   static Future<User?> signInWithEmailAndPassword({
@@ -9,8 +10,8 @@ class AuthService {
   }) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: email.trim(),
+        password: password.trim(),
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
@@ -106,5 +107,23 @@ class AuthService {
         message: errorMessage,
       );
     }
+  }
+
+  static Future<UserCredential?> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    if (googleUser == null) {
+      // User cancelled the sign-in
+      return null;
+    }
+
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

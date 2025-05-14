@@ -221,4 +221,14 @@ void dispose() {
     }
   }
 
+  Future<List<Map<String, dynamic>>> fetchVideosForLevel(String levelId) async {
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('levels_task')
+        .where('levels_ID', isEqualTo: levelId)
+        .orderBy('order')
+        .get();
+
+    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+  }
+
 }

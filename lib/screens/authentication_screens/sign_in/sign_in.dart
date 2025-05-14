@@ -160,19 +160,32 @@ class _SignInScreenState extends State<SignInScreen> {
                 // Button with form validation
                 CustomButton(
                   name: "Login",
-                  onPress: () {
-                    if (_formKey.currentState!.validate()) {
-                      AuthService.signInWithEmailAndPassword(
-                        email: _emailController.text.trim(),
-                        password: _passwordController.text.trim(),
-                      ).then(
-                        (value) {
-                          Get.offAll(const CustomNavBar());
-                          addUserData();
-                        },
-                      );
-                    }
-                  },
+                  onPress: () async {
+  if (_formKey.currentState!.validate()) {
+    try {
+      print(_emailController.text.trim());
+      print(_passwordController.text.trim());
+
+      await AuthService.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      Get.offAll(const CustomNavBar());
+      addUserData();
+    } catch (e) {
+      print('Login error: $e');
+      // You can also show a Snackbar or Dialog
+      Get.snackbar(
+        'Login Failed',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+      );
+    }
+  }
+},
                 ),
                 SizedBox(height: 40.h),
                 Row(
@@ -249,7 +262,14 @@ class SocialButton extends StatelessWidget {
       width: double.infinity,
       height: 50.h,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () async{
+            final userCredential = await AuthService.signInWithGoogle();
+    if (userCredential != null) {
+    print("sucessfull ");
+    } else {
+      // User cancelled or error
+    }
+        },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

@@ -49,8 +49,8 @@ class GetStarted extends StatelessWidget {
                 CustomButton(
                   name: "Get Started",
                   onPress: () {
-                    Get.offAll(() => const CustomNavBar());
-                    // FirebaseAuth.instance.currentUser != null ? const CustomNavBar() : const OnboardingScreen());
+                    Get.offAll(() => 
+                    FirebaseAuth.instance.currentUser != null ? const CustomNavBar() : const OnboardingScreen());
                   },
                 ),
               ],

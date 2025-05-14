@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "432353550671",
+    "project_id": "educationalapp-a847b",
+    "storage_bucket": "educationalapp-a847b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432353550671:android:dcd55e34e9c90347cfe53a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmJ36LC6IMTrzqKzrZMOn4EjAvrFaje0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
